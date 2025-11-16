@@ -35,8 +35,8 @@ class Model:
             for consumo in consumi:
                 data_consumo=str(consumo.data)
                 parti=data_consumo.split("-")
-                mese=int(parti[1])
-                if mese==mese:
+                mese_split=int(parti[1])
+                if mese_split==mese:
                     consumi_mensili.append(consumo.kwh)  # mi ritorna una lista con i kwh
 
             if len(consumi_mensili)==0:
@@ -69,11 +69,10 @@ class Model:
 
     def __ricorsione(self, sequenza_parziale, giorno, ultimo_impianto, costo_corrente, consumi_settimana):
         """ Implementa la ricorsione """
-        print(f"{ costo_corrente }, {sequenza_parziale }")
         if giorno>7:
             if self.__costo_ottimo is None or costo_corrente < self.__costo_ottimo:
                 self.__costo_ottimo = costo_corrente
-                self.__sequenza_ottima=sequenza_parziale
+                self.__sequenza_ottima=list(sequenza_parziale)
             return
         else:
             for impianto in consumi_settimana.keys():
