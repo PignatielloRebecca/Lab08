@@ -77,18 +77,19 @@ class Model:
         """ Implementa la ricorsione """
         if giorno>7:
             return
-        costo_minore=0 # tiene il costo migliore dentro al ciclo
-        impianto_scelto=None  # tiene l'impianto che ha quel costo
-        for impianto in consumi_settimana:
-            costo_giornaliero=consumi_settimana[impianto][giorno -1]  # per ogni impianto prendo il consumo del giorno
-            if impianto!=ultimo_impianto and ultimo_impianto is not None:
-                costo_giornaliero+=5  # se l'impianto non è uguale a quello precedente, aggiungi il costo di 5 euro
-            if costo_giornaliero<costo_minore or costo_minore==0:
-                costo_minore=costo_giornaliero
-                impianto_scelto=impianto
-        sequenza_parziale.append(impianto_scelto)
-        costo_corrente[0]+=costo_minore
-        self.__ricorsione(sequenza_parziale, giorno+1, impianto_scelto, costo_corrente, consumi_settimana)
+        else:
+            costo_minore=0 # tiene il costo migliore dentro al ciclo
+            impianto_scelto=None # tiene l'impianto che ha quel costo
+            for impianto in consumi_settimana:
+                costo_giornaliero=consumi_settimana[impianto][giorno -1]  # per ogni impianto prendo il consumo del giorno
+                if impianto!=ultimo_impianto and ultimo_impianto is not None:
+                    costo_giornaliero+=5  # se l'impianto non è uguale a quello precedente, aggiungi il costo di 5 euro
+                if costo_giornaliero<costo_minore or costo_minore==0:
+                    costo_minore=costo_giornaliero
+                    impianto_scelto=impianto
+            sequenza_parziale.append(impianto_scelto)
+            costo_corrente[0]+=costo_minore
+            self.__ricorsione(sequenza_parziale, giorno+1, impianto_scelto, costo_corrente, consumi_settimana)
 
         # TODO
 
